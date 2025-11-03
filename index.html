@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forearm Bones Fill-in-the-Blank Quiz</title>
+<style>
+  :root { --col-left: 76%; }
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #ffffff;
+  }
+  .quiz-container {
+    position: relative;
+    display: inline-block;
+  }
+  img {
+    width: 1000px;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+  }
+  input {
+    position: absolute;
+    left: var(--col-left);
+    width: 200px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 3px;
+    font-size: 14px;
+    text-align: left;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  input.correct {
+    border-color: green;
+    color: green;
+    font-weight: bold;
+  }
+  input.incorrect {
+    border-color: red;
+    color: red;
+  }
+  #score {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+<h2>Forearm Bones Fill-in-the-Blank Quiz</h2>
+<p>Type the correct anatomical term for each number. Correct answers turn <b style="color:green;">green</b>; incorrect answers turn <b style="color:red;">red</b>.</p>
+
+<div class="quiz-container">
+  <img src="forearm label.png" alt="Forearm Bones Diagram">
+
+  <!-- Input boxes now directly aligned beside each number -->
+  <input style="top: 7%;" data-answer="Proximal radioulnar joint">
+  <input style="top: 11.5%;" data-answer="Olecranon process">
+  <input style="top: 16%;" data-answer="Coronoid process">
+  <input style="top: 21%;" data-answer="Coronoid tubercle">
+  <input style="top: 26%;" data-answer="Body">
+  <input style="top: 31%;" data-answer="Ulna">
+  <input style="top: 36%;" data-answer="Ulnar notch">
+  <input style="top: 41%;" data-answer="Head">
+  <input style="top: 45.5%;" data-answer="Styloid process">
+  <input style="top: 50%;" data-answer="Distal radioulnar joint">
+  <input style="top: 55%;" data-answer="Styloid process">
+  <input style="top: 59.7%;" data-answer="Radius">
+  <input style="top: 64.6%;" data-answer="Body">
+  <input style="top: 69.3%;" data-answer="Radial tuberosity">
+  <input style="top: 74.2%;" data-answer="Neck">
+  <input style="top: 79%;" data-answer="Head">
+  <input style="top: 84%;" data-answer="Radial notch">
+</div>
+
+<div id="score">Score: 0 / 17</div>
+
+<script>
+window.addEventListener('load', () => {
+  const inputs = document.querySelectorAll('input');
+  const scoreDisplay = document.getElementById('score');
+
+  function updateScore() {
+    const total = inputs.length;
+    const correct = document.querySelectorAll('input.correct').length;
+    scoreDisplay.textContent = `Score: ${correct} / ${total}`;
+  }
+
+  inputs.forEach(input => {
+    input.addEventListener('input', () => {
+      const correctAnswer = input.dataset.answer.toLowerCase().trim();
+      const userAnswer = input.value.toLowerCase().trim();
+      if (userAnswer === correctAnswer) {
+        input.classList.add('correct');
+        input.classList.remove('incorrect');
+      } else if (userAnswer.length > 0) {
+        input.classList.add('incorrect');
+        input.classList.remove('correct');
+      } else {
+        input.classList.remove('correct', 'incorrect');
+      }
+      updateScore();
+    });
+  });
+});
+</script>
+</body>
+</html>
